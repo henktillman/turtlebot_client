@@ -124,26 +124,26 @@ def main():
         ob = _get_obs(current_state, box, box_angle, target)
         return ob
 
-    # while ob[0] > 0.01:
-    #     action = (np.clip(ob[0], 0.01, 0.1), np.clip(ob[1], -0.8, 0.8))
-    #     ob = get_ob_action(action)
-    # while np.abs(ob[3]) > 0.05:
-    #     action = (0, np.clip(ob[3], -0.8, 0.8))
-    #     ob = get_ob_action(action)
-    # while ob[2] > 0.095:
-    #     action = (np.clip(ob[2]-0.095, 0.01, 0.1), 0)
-    #     ob = get_ob_action(action)
-    # while ob[4] > 0.095:
-    #     action = (np.clip(ob[4]-0.095, 0.01, 0.1), np.clip(ob[5], -0.8, 0.8))
-    #     ob = get_ob_action(action)
-
-    t = 0
-    while t < 1000:
-        one_hot_intention = np.zeros(n_intentions)
-        one_hot_intention[2] = 1
-        action = irl_model.policy.act([np.concatenate((ob, one_hot_intention))], irl_model.sess)[0]
+    while ob[0] > 0.01:
+        action = (2*np.clip(ob[0], 0.01, 0.1), 2*np.clip(ob[1], -0.8, 0.8))
         ob = get_ob_action(action)
-        t += 1
+    while np.abs(ob[3]) > 0.05:
+        action = (0, 4*np.clip(ob[3], -0.8, 0.8))
+        ob = get_ob_action(action)
+    while ob[2] > 0.095:
+        action = (2*np.clip(ob[2]-0.095, 0.01, 0.1), 0)
+        ob = get_ob_action(action)
+    while ob[4] > 0.095:
+        action = (2*np.clip(ob[4]-0.095, 0.01, 0.1), 2*np.clip(ob[5], -0.8, 0.8))
+        ob = get_ob_action(action)
+
+    # t = 0
+    # while t < 1000:
+    #     one_hot_intention = np.zeros(n_intentions)
+    #     one_hot_intention[2] = 1
+    #     action = irl_model.policy.act([np.concatenate((ob, one_hot_intention))], irl_model.sess)[0]
+    #     ob = get_ob_action(action)
+    #     t += 1
 
     
 def shutdown():
