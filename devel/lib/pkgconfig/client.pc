@@ -1,0 +1,8 @@
+prefix=/home/cc/ee106b/sp18/class/ee106b-aax/ros_workspaces/turtle_client/devel
+
+Name: client
+Description: Description of client
+Version: 0.0.0
+Cflags: 
+Libs: -L/home/cc/ee106b/sp18/class/ee106b-aax/ros_workspaces/turtle_client/devel/lib 
+Requires: 

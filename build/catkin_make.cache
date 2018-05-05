@@ -1,0 +1,2 @@
+client
+-DCATKIN_DEVEL_PREFIX=/home/cc/ee106b/sp18/class/ee106b-aax/ros_workspaces/turtle_client/devel -DCMAKE_INSTALL_PREFIX=/home/cc/ee106b/sp18/class/ee106b-aax/ros_workspaces/turtle_client/install -G Unix Makefiles
