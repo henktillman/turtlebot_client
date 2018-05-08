@@ -61,7 +61,8 @@ def main():
     start_state = get_pos(start_pos, start_rot)
 
     t = 0
-    box = np.array([0.7, 0.4])
+    # box = np.array([0.7, 0.4])
+    box = np.array([0.735, 0.335])
     target = np.array([0.4, 0.7])
     box_angle = np.pi/8
     state = np.array([0,0,0])
@@ -120,35 +121,35 @@ def main():
         ob = _get_obs(current_state, box, box_angle, target)
         return ob
 
-    # while ob[0] > 0.01:
-    #     action = (np.clip(ob[0], 0.01, 0.1), np.clip(ob[1], -0.8, 0.8))
-    #     ob = get_ob_action(action)
-    # while np.abs(ob[3]) > 0.05:
-    #     action = (0, np.clip(ob[3], -0.8, 0.8))
-    #     ob = get_ob_action(action)
-    # while ob[2] > 0.095:
-    #     action = (np.clip(ob[2]-0.095, 0.01, 0.1), 0)
-    #     ob = get_ob_action(action)
-    # while ob[4] > 0.095:
-    #     action = (np.clip(ob[4]-0.095, 0.01, 0.1), np.clip(ob[5], -0.8, 0.8))
-    #     ob = get_ob_action(action)
-
-    t = 0
-    while t < 193:
-        # intention = irl_model.intention_policy.test_act([ob], irl_model.sess)[0]
-        # one_hot_intention = np.zeros(n_intentions)
-        # one_hot_intention[intention] = 1
-        # action = irl_model.policy.test_act([np.concatenate((ob, one_hot_intention))], irl_model.sess)[0]
-        intention_probs = irl_model.intention_policy.test_probs([ob], irl_model.sess)[0]
-        action = np.zeros(2)
-        for intention in range(n_intentions):
-            one_hot_intention = np.zeros(n_intentions)
-            one_hot_intention[intention] = 1
-            action += intention_probs[intention] \
-                * irl_model.policy.test_act([np.concatenate((ob, one_hot_intention))], irl_model.sess)[0]
-
+    while ob[0] > 0.01:
+        action = (np.clip(ob[0], 0.01, 0.1), np.clip(ob[1], -0.8, 0.8))
         ob = get_ob_action(action)
-        t += 1
+    while np.abs(ob[3]) > 0.05:
+        action = (0, np.clip(ob[3], -0.8, 0.8))
+        ob = get_ob_action(action)
+    while ob[2] > 0.095:
+        action = (np.clip(ob[2]-0.095, 0.01, 0.1), 0)
+        ob = get_ob_action(action)
+    while ob[4] > 0.095:
+        action = (np.clip(ob[4]-0.095, 0.01, 0.1), np.clip(ob[5], -0.8, 0.8))
+        ob = get_ob_action(action)
+
+    # t = 0
+    # while t < 193:
+    #     # intention = irl_model.intention_policy.test_act([ob], irl_model.sess)[0]
+    #     # one_hot_intention = np.zeros(n_intentions)
+    #     # one_hot_intention[intention] = 1
+    #     # action = irl_model.policy.test_act([np.concatenate((ob, one_hot_intention))], irl_model.sess)[0]
+    #     intention_probs = irl_model.intention_policy.test_probs([ob], irl_model.sess)[0]
+    #     action = np.zeros(2)
+    #     for intention in range(n_intentions):
+    #         one_hot_intention = np.zeros(n_intentions)
+    #         one_hot_intention[intention] = 1
+    #         action += intention_probs[intention] \
+    #             * irl_model.policy.test_act([np.concatenate((ob, one_hot_intention))], irl_model.sess)[0]
+
+    #     ob = get_ob_action(action)
+    #     t += 1
 
     
 def shutdown():
